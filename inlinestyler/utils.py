@@ -1,7 +1,8 @@
 from lxml import etree
-from converter import Conversion
+from inlinestyler.converter import Conversion
 
-def inline_css(html_message):
+
+def inline_css(html_message, source_url=''):
     """
     Inlines all CSS in an HTML string
 
@@ -10,9 +11,10 @@ def inline_css(html_message):
 
     Arguments:
         html_message -- a string of HTML, including CSS
+        source_url -- the url of the document, used to determine relative paths
     """
 
     document = etree.HTML(html_message)
     converter = Conversion()
-    converter.perform(document, html_message, '')
+    converter.perform(document, html_message, source_url)
     return converter.convertedHTML
